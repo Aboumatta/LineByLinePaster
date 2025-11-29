@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>逐行粘贴 (Linebyline Paster) - Mac 免费效率工具</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .mac-window {
+            box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.3);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* 模拟 macOS 窗口控制点 */
+        .dot {
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .dot-red { background-color: #ff5f56; }
+        .dot-yellow { background-color: #ffbd2e; }
+        .dot-green { background-color: #27c93f; }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                    <img src="./icon.png" alt="App Icon" class="w-9 h-9 rounded-lg shadow-sm object-cover">
+                    <span class="font-bold text-xl tracking-tight" data-i18n="appName">逐行粘贴</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-slate-600 hover:text-blue-600 transition" data-i18n="navFeatures">功能</a>
+                    <a href="#usage" class="text-slate-600 hover:text-blue-600 transition" data-i18n="navTutorial">使用教程</a>
+                    <a href="#support" class="text-slate-600 hover:text-pink-600 transition" data-i18n="navSupport">支持开发者</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <!-- 语言切换按钮 -->
+                    <button id="lang-toggle" class="text-slate-500 hover:text-slate-800 transition flex items-center gap-1 text-sm font-medium px-2 py-1 rounded hover:bg-slate-100">
+                        <i class="fa-solid fa-globe"></i> <span id="lang-text">En</span>
+                    </button>
+
+                    <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-full text-sm font-medium transition shadow-lg shadow-slate-900/20" data-i18n="btnFreeDownload">
+                        免费下载
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="pt-32 pb-20 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block mb-4 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold border border-blue-100">
+                <span data-i18n="badgeGemini">✨ Gemini 辅助开发 · 完全免费</span>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 text-slate-900">
+                <span data-i18n="heroTitle1">告别重复复制粘贴，</span><br>
+                <span class="gradient-text" data-i18n="heroTitle2">逐行输入</span> <span data-i18n="heroTitle3">从此简单。</span>
+            </h1>
+            <p class="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed" data-i18n="heroDesc">
+                专为 Mac 用户设计的轻量级工具。复制多行文本，按快捷键逐行自动粘贴。表单填写、代码录入、数据迁移的神器。
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16" id="download">
+                <a href="#" onclick="alert('请查看页面底部的【开发者指南】来配置此下载按钮！\nPlease check the [Developer Guide] at the bottom of the page to configure this button!')" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-blue-600 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/30">
+                    <i class="fa-brands fa-apple mr-2 text-2xl"></i>
+                    <span data-i18n="btnDownloadMac">下载 macOS 版本</span>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full transform group-hover:scale-110 transition">v1.0</span>
+                </a>
+                <a href="#usage" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-slate-700 transition-all duration-200 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200 hover:bg-slate-50 hover:border-slate-300">
+                    <i class="fa-solid fa-play mr-2"></i>
+                    <span data-i18n="btnViewDemo">查看演示</span>
+                </a>
+            </div>
+
+            <!-- 软件截图演示 -->
+            <div class="relative max-w-4xl mx-auto mt-8">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 transform blur-2xl opacity-20 rounded-3xl -z-10"></div>
+                <div class="bg-slate-800 rounded-xl p-2 mac-window border border-slate-700">
+                    <div class="bg-slate-900 rounded-lg overflow-hidden">
+                        <!-- 模拟 Window Header -->
+                        <div class="bg-slate-800 px-4 py-2 flex items-center gap-2 border-b border-slate-700">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <div class="ml-4 text-xs text-slate-400 font-mono" data-i18n="demoAppName">逐行粘贴.app</div>
+                        </div>
+                        <!-- 模拟界面内容 -->
+                        <div class="p-8 text-left font-mono text-sm md:text-base">
+                            <div class="text-slate-400 mb-2" data-i18n="demoStep1">// 1. 复制以下多行内容</div>
+                            <div class="bg-slate-800/50 p-4 rounded border border-slate-700 text-blue-300 mb-6">
+                                <span data-i18n="demoLine1">第一行数据：用户ID 1001</span><br>
+                                <span data-i18n="demoLine2">第二行数据：用户名 Alice</span><br>
+                                <span data-i18n="demoLine3">第三行数据：邮箱 alice@example.com</span>
+                            </div>
+                            
+                            <div class="text-slate-400 mb-2" data-i18n="demoStep2">// 2. 在目标输入框按下快捷键 (如 Cmd+Shift+V)</div>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-slate-500 w-20" data-i18n="demoInput1">输入框 1:</span>
+                                    <div class="typing-effect bg-white text-slate-900 px-3 py-1 rounded w-full max-w-xs h-8 flex items-center">
+                                        <span data-i18n="demoLine1Typed">第一行数据：用户ID 1001</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-slate-500 w-20" data-i18n="demoInput2">输入框 2:</span>
+                                    <div class="typing-effect bg-white text-slate-900 px-3 py-1 rounded w-full max-w-xs h-8 flex items-center border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]">
+                                        <span class="animate-pulse">|</span>
+                                    </div>
+                                    <span class="text-green-500 text-xs"><i class="fa-solid fa-check"></i> <span data-i18n="demoAutoPaste">自动粘贴下一行</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特性介绍 -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900" data-i18n="featTitle">为什么你需要它？</h2>
+                <p class="mt-4 text-lg text-slate-600" data-i18n="featSub">简单到极致的功能，解决最烦人的重复劳动</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 text-xl mb-4">
+                        <i class="fa-solid fa-list-ol"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-900" data-i18n="feat1Title">顺序粘贴</h3>
+                    <p class="text-slate-600" data-i18n="feat1Desc">无论你复制了多少行文本，软件会自动将其分割，每次按下快捷键只粘贴其中的一行，并自动准备下一行。</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 text-xl mb-4">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-900" data-i18n="feat2Title">全局快捷键</h3>
+                    <p class="text-slate-600" data-i18n="feat2Desc">支持自定义全局快捷键，无论你在浏览器、Excel 还是终端中，都能随时唤起粘贴功能。</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600 text-xl mb-4">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-900" data-i18n="feat3Title">安全且本地</h3>
+                    <p class="text-slate-600" data-i18n="feat3Desc">所有剪贴板数据仅在本地内存中处理，不上传任何服务器。代码由 Gemini 协助生成，透明可控。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使用教程 -->
+    <section id="usage" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center" data-i18n="usageTitle">简单逻辑，上手即用</h2>
+            <div class="space-y-8">
+                <div class="flex gap-6">
+                    <div class="flex-none w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-lg">1</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="usageStep1Title">设置快捷键</h3>
+                        <p class="text-slate-600" data-i18n="usageStep1Desc">打开软件后点击顶部状态栏图标，在菜单中选择「设置快捷键」。</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <div class="flex-none w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-lg">2</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="usageStep2Title">复制内容</h3>
+                        <p class="text-slate-600" data-i18n="usageStep2Desc">像平时一样，选中包含多行文本的内容（Excel 列或文本段落），按下 <kbd class="px-2 py-1 bg-white border border-slate-300 rounded text-sm">Cmd + C</kbd> 复制。</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <div class="flex-none w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-lg">3</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="usageStep3Title">逐行粘贴</h3>
+                        <p class="text-slate-600" data-i18n="usageStep3Desc">将光标放置到目标输入框中。按下刚才设置的快捷键，每次会粘贴一行内容。所有行粘贴完毕后，软件自动提示并重置状态。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 支持开发区域 -->
+    <section id="support" class="py-16 bg-white border-t border-slate-200">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-pink-100 text-pink-500 mb-4">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900 mb-4" data-i18n="supportTitle">觉得好用？支持开发者</h2>
+            <p class="text-slate-600 mb-8 max-w-lg mx-auto" data-i18n="supportDesc">
+                Linebyline Paster 是一个完全免费的开源工具。如果你喜欢它，可以通过 Ko-fi 请我喝杯咖啡，这将鼓励我继续开发更多好用的工具。
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <!-- Ko-fi 按钮 -->
+                <a href="https://ko-fi.com/chilllime" target="_blank" class="inline-flex items-center px-6 py-3 bg-[#FF5E5B] hover:bg-[#FF403C] text-white font-bold rounded-full transition transform hover:scale-105 shadow-lg shadow-pink-500/30">
+                    <i class="fa-solid fa-mug-hot mr-2"></i>
+                    <span data-i18n="btnKofi">在 Ko-fi 上支持我</span>
+                </a>
+                
+                <!-- 占位符：你可以在这里添加 GitHub Sponsor 按钮或其他链接 -->
+                <!-- 
+                <a href="#" class="inline-flex items-center px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-full transition">
+                    <i class="fa-regular fa-heart mr-2"></i>
+                    GitHub Sponsors (Coming Soon)
+                </a> 
+                -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 开发者指南：如何配置下载 -->
+    <section class="py-12 bg-amber-50 border-t-4 border-amber-400">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-start gap-4">
+                <div class="text-amber-600 text-3xl mt-1"><i class="fa-solid fa-circle-info"></i></div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-bold text-amber-800 mb-4" data-i18n="adminTitle">🎓 站长教程：如何让“下载”按钮生效？</h2>
+                    <p class="text-amber-700 mb-4" data-i18n="adminDesc">
+                        你好！现在这个网站已经建好了，但你的软件文件（.dmg 或 .zip）还没有上传。请按照以下步骤操作，让用户可以下载到你的软件：
+                    </p>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-amber-200 space-y-4">
+                        <div>
+                            <h4 class="font-bold text-amber-900 flex items-center gap-2" data-i18n="adminStep1Title">
+                                <i class="fa-solid fa-upload"></i> 第一步：准备文件
+                            </h4>
+                            <p class="text-sm text-slate-600 mt-1" data-i18n="adminStep1Desc">
+                                将你用 Gemini 做的 Mac 软件打包成 <code class="bg-slate-100 px-1 py-0.5 rounded text-pink-600">LinePaste.dmg</code> 或 <code class="bg-slate-100 px-1 py-0.5 rounded text-pink-600">LinePaste.zip</code>。
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-amber-900 flex items-center gap-2" data-i18n="adminStep2Title">
+                                <i class="fa-solid fa-folder-open"></i> 第二步：上传文件
+                            </h4>
+                            <p class="text-sm text-slate-600 mt-1" data-i18n="adminStep2Desc">
+                                将这个文件放置在<b>此 index.html 网页文件所在的同一个文件夹内</b>。
+                                <br>
+                                <i>(如果你使用 GitHub Pages，就把它上传到你的 GitHub 仓库里)</i>
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-amber-900 flex items-center gap-2" data-i18n="adminStep3Title">
+                                <i class="fa-solid fa-code"></i> 第三步：修改代码
+                            </h4>
+                            <p class="text-sm text-slate-600 mt-1" data-i18n="adminStep3Desc">
+                                打开 <code class="bg-slate-100 px-1 py-0.5 rounded">index.html</code> 文件，搜索 "macOS 版本"。找到对应的 <code>&lt;a href="#" ...&gt;</code> 标签。
+                                <br>
+                                将 <code>href="#"</code> 修改为 <code>href="./LinePaste.dmg"</code> (假设你的文件名是这个)。
+                            </p>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-amber-100">
+                            <p class="text-xs text-slate-500 italic" data-i18n="adminNote">
+                                * 完成这些步骤后，你可以删除这段黄色背景的“站长教程”区域 (搜索 HTML 中的 "开发者指南" 并删除整个 section 标签)。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div class="mb-6 md:mb-0">
+                <div class="flex items-center gap-2 text-white mb-2">
+                    <i class="fa-solid fa-paste"></i>
+                    <span class="font-bold text-lg" data-i18n="appName">逐行粘贴</span>
+                </div>
+                <p class="text-sm mb-2" data-i18n="footerDesc">由 Gemini 协助构建的效率小工具。</p>
+                <p class="text-xs text-slate-600" data-i18n="footerCopyright">© 2025 上海闲柠文化发展有限公司</p>
+            </div>
+            <div class="flex flex-col items-start md:items-end gap-2 text-sm">
+                <div class="flex items-center gap-4 mb-1">
+                    <span class="text-slate-500 font-bold" data-i18n="footerFeedback">反馈问题</span>
+                </div>
+                <a href="mailto:chilllemon29@gmail.com" class="hover:text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-envelope"></i> chilllemon29@gmail.com
+                </a>
+                <a href="https://github.com/chill-lime/LineByLinePaster/issues" target="_blank" class="hover:text-white transition flex items-center gap-2">
+                    <i class="fa-brands fa-github"></i> <span data-i18n="footerGithub">提交 GitHub Issue</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 国际化配置
+        const i18nData = {
+            zh: {
+                appName: "逐行粘贴",
+                navFeatures: "功能",
+                navTutorial: "使用教程",
+                navSupport: "支持开发者",
+                navDownload: "下载",
+                btnFreeDownload: "免费下载",
+                badgeGemini: "✨ Gemini 辅助开发 · 完全免费",
+                heroTitle1: "告别重复复制粘贴，",
+                heroTitle2: "逐行输入",
+                heroTitle3: "从此简单。",
+                heroDesc: "专为 Mac 用户设计的轻量级工具。复制多行文本，按快捷键逐行自动粘贴。表单填写、代码录入、数据迁移的神器。",
+                btnDownloadMac: "下载 macOS 版本",
+                btnViewDemo: "查看演示",
+                demoAppName: "逐行粘贴.app",
+                demoStep1: "// 1. 复制以下多行内容",
+                demoLine1: "第一行数据：用户ID 1001",
+                demoLine2: "第二行数据：用户名 Alice",
+                demoLine3: "第三行数据：邮箱 alice@example.com",
+                demoStep2: "// 2. 在目标输入框按下快捷键 (如 Cmd+Shift+V)",
+                demoInput1: "输入框 1:",
+                demoLine1Typed: "第一行数据：用户ID 1001",
+                demoInput2: "输入框 2:",
+                demoAutoPaste: "自动粘贴下一行",
+                featTitle: "为什么你需要它？",
+                featSub: "简单到极致的功能，解决最烦人的重复劳动",
+                feat1Title: "顺序粘贴",
+                feat1Desc: "无论你复制了多少行文本，软件会自动将其分割，每次按下快捷键只粘贴其中的一行，并自动准备下一行。",
+                feat2Title: "全局快捷键",
+                feat2Desc: "支持自定义全局快捷键，无论你在浏览器、Excel 还是终端中，都能随时唤起粘贴功能。",
+                feat3Title: "安全且本地",
+                feat3Desc: "所有剪贴板数据仅在本地内存中处理，不上传任何服务器。代码由 Gemini 协助生成，透明可控。",
+                usageTitle: "简单逻辑，上手即用",
+                usageStep1Title: "设置快捷键",
+                usageStep1Desc: "打开软件后点击顶部状态栏图标，在菜单中选择「设置快捷键」。",
+                usageStep2Title: "复制内容",
+                usageStep2Desc: "像平时一样，选中包含多行文本的内容（Excel 列或文本段落），按下 Cmd + C 复制。",
+                usageStep3Title: "逐行粘贴",
+                usageStep3Desc: "将光标放置到目标输入框中。按下刚才设置的快捷键，每次会粘贴一行内容。所有行粘贴完毕后，软件自动提示并重置状态。",
+                supportTitle: "觉得好用？支持开发者",
+                supportDesc: "Linebyline Paster 是一个完全免费的开源工具。如果你喜欢它，可以通过 Ko-fi 请我喝杯咖啡，这将鼓励我继续开发更多好用的工具。",
+                btnKofi: "在 Ko-fi 上支持我",
+                adminTitle: "🎓 站长教程：如何让“下载”按钮生效？",
+                adminDesc: "你好！现在这个网站已经建好了，但你的软件文件（.dmg 或 .zip）还没有上传。请按照以下步骤操作，让用户可以下载到你的软件：",
+                adminStep1Title: "第一步：准备文件",
+                adminStep1Desc: "将你用 Gemini 做的 Mac 软件打包成 LinePaste.dmg 或 LinePaste.zip。",
+                adminStep2Title: "第二步：上传文件",
+                adminStep2Desc: "将这个文件放置在此 index.html 网页文件所在的同一个文件夹内。",
+                adminStep3Title: "第三步：修改代码",
+                adminStep3Desc: "打开 index.html 文件，搜索 'macOS 版本'。找到对应的 <a href='#'> 标签。将 href='#' 修改为 href='./LinePaste.dmg'。",
+                adminNote: "* 完成这些步骤后，你可以删除这段黄色背景的“站长教程”区域。",
+                footerDesc: "由 Gemini 协助构建的效率小工具。",
+                footerCopyright: "© 2025 上海闲柠文化发展有限公司",
+                footerFeedback: "反馈问题",
+                footerGithub: "提交 GitHub Issue"
+            },
+            en: {
+                appName: "Linebyline Paster",
+                navFeatures: "Features",
+                navTutorial: "Tutorial",
+                navSupport: "Support",
+                navDownload: "Download",
+                btnFreeDownload: "Free Download",
+                badgeGemini: "✨ Built with Gemini · 100% Free",
+                heroTitle1: "Stop Copy-Pasting Repeatedly.",
+                heroTitle2: "Line-by-Line Input",
+                heroTitle3: "Made Easy.",
+                heroDesc: "A lightweight tool for Mac. Copy multi-line text, then paste line by line with a shortcut. Perfect for forms, coding, and data entry.",
+                btnDownloadMac: "Download for macOS",
+                btnViewDemo: "View Demo",
+                demoAppName: "LinePaste.app",
+                demoStep1: "// 1. Copy multi-line content",
+                demoLine1: "Line 1: User ID 1001",
+                demoLine2: "Line 2: Username Alice",
+                demoLine3: "Line 3: Email alice@example.com",
+                demoStep2: "// 2. Press shortcut (e.g. Cmd+Shift+V)",
+                demoInput1: "Input 1:",
+                demoLine1Typed: "Line 1: User ID 1001",
+                demoInput2: "Input 2:",
+                demoAutoPaste: "Ready for next line",
+                featTitle: "Why do you need it?",
+                featSub: "Simple functionality to solve the most annoying repetitive tasks.",
+                feat1Title: "Sequential Paste",
+                feat1Desc: "No matter how many lines you copy, the app splits them. Each shortcut press pastes just one line and prepares the next.",
+                feat2Title: "Global Shortcuts",
+                feat2Desc: "Customizable global shortcuts work everywhere: Browsers, Excel, Terminal, or any other app.",
+                feat3Title: "Secure & Local",
+                feat3Desc: "Clipboard data stays in local memory. No server uploads. Code generated by Gemini, transparent and safe.",
+                usageTitle: "Simple Workflow",
+                usageStep1Title: "Set Shortcut",
+                usageStep1Desc: "Open the app, click the status bar icon, and select 'Set Shortcut' from the menu.",
+                usageStep2Title: "Copy Content",
+                usageStep2Desc: "Select text containing multiple lines (like an Excel column or paragraph) and press Cmd + C as usual.",
+                usageStep3Title: "Paste Line by Line",
+                usageStep3Desc: "Place cursor in the target box. Press your set shortcut to paste one line. Repeat until finished. The app resets automatically.",
+                supportTitle: "Enjoying the app?",
+                supportDesc: "Linebyline Paster is completely free and open source. If you find it useful, you can support my work by buying me a coffee on Ko-fi.",
+                btnKofi: "Support me on Ko-fi",
+                adminTitle: "🎓 Admin Guide: How to enable downloads?",
+                adminDesc: "Hello! The site is ready, but your software file (.dmg/.zip) isn't uploaded yet. Follow these steps:",
+                adminStep1Title: "Step 1: Prepare File",
+                adminStep1Desc: "Package your Gemini-made Mac app as LinePaste.dmg or LinePaste.zip.",
+                adminStep2Title: "Step 2: Upload File",
+                adminStep2Desc: "Place the file in the SAME folder as this index.html file.",
+                adminStep3Title: "Step 3: Edit Code",
+                adminStep3Desc: "Open index.html, search for 'href=\"#\"' inside the download button, and change it to 'href=\"./LinePaste.dmg\"'.",
+                adminNote: "* You can delete this yellow 'Admin Guide' section after you are done.",
+                footerDesc: "A productivity tool built with the help of Gemini.",
+                footerCopyright: "© 2025 Shanghai ChillLime Culture Development Co., Ltd.",
+                footerFeedback: "Feedback",
+                footerGithub: "Submit GitHub Issue"
+            }
+        };
+
+        let currentLang = 'zh';
+
+        document.getElementById('lang-toggle').addEventListener('click', function() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            updateLanguage();
+        });
+
+        function updateLanguage() {
+            // 更新按钮文本
+            document.getElementById('lang-text').textContent = currentLang === 'zh' ? 'En' : '中文';
+            
+            // 更新所有带 data-i18n 属性的元素
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18nData[currentLang][key]) {
+                    el.innerHTML = i18nData[currentLang][key]; // 使用 innerHTML 以支持简单的 HTML 标签
+                }
+            });
+
+            // 更新 HTML lang 属性
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+        }
+    </script>
+</body>
+</html>
