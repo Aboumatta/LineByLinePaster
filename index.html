@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>逐行粘贴 (Linebyline Paster) - Mac 免费效率工具</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
+    <link rel="icon" href="./icon.png">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -73,7 +73,7 @@
                 <span class="gradient-text" data-i18n="heroTitle2">逐行输入</span> <span data-i18n="heroTitle3">从此简单。</span>
             </h1>
             <p class="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed" data-i18n="heroDesc">
-                专为 Mac 用户设计的轻量级工具。复制多行文本，按快捷键逐行自动粘贴。表单填写、代码录入、数据迁移的神器。
+                专为 Mac 用户设计的轻量级工具。复制多行文本，按快捷键逐行粘贴。<br>表单填写、代码录入、数据迁移的神器。
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16" id="download">
@@ -122,7 +122,7 @@
                                     <div class="typing-effect bg-white text-slate-900 px-3 py-1 rounded w-full max-w-xs h-8 flex items-center border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]">
                                         <span class="animate-pulse">|</span>
                                     </div>
-                                    <span class="text-green-500 text-xs"><i class="fa-solid fa-check"></i> <span data-i18n="demoAutoPaste">自动粘贴下一行</span></span>
+                                    <span class="text-green-500 text-xs"><i class="fa-solid fa-check"></i> <span data-i18n="demoAutoPaste">粘贴下一行</span></span>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
                         <i class="fa-solid fa-list-ol"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-slate-900" data-i18n="feat1Title">顺序粘贴</h3>
-                    <p class="text-slate-600" data-i18n="feat1Desc">无论你复制了多少行文本，软件会自动将其分割，每次按下快捷键只粘贴其中的一行，并自动准备下一行。</p>
+                    <p class="text-slate-600" data-i18n="feat1Desc">无论你复制了多少行文本，软件会自动将其分割，每次按下快捷键只粘贴其中的一行，并准备下一行。</p>
                 </div>
                 <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-lg transition">
                     <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 text-xl mb-4">
@@ -189,7 +189,7 @@
                     <div class="flex-none w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-lg">3</div>
                     <div>
                         <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="usageStep3Title">逐行粘贴</h3>
-                        <p class="text-slate-600" data-i18n="usageStep3Desc">将光标放置到目标输入框中。按下刚才设置的快捷键，每次会粘贴一行内容。所有行粘贴完毕后，软件自动提示并重置状态。</p>
+                        <p class="text-slate-600" data-i18n="usageStep3Desc">将光标放置到目标输入框中。按下刚才设置的快捷键，每次会粘贴一行内容。所有行粘贴完毕后，复制新的内容继续粘贴。</p>
                     </div>
                 </div>
             </div>
@@ -280,7 +280,7 @@
                 heroTitle1: "告别重复复制粘贴，",
                 heroTitle2: "逐行输入",
                 heroTitle3: "从此简单。",
-                heroDesc: "专为 Mac 用户设计的轻量级工具。复制多行文本，按快捷键逐行自动粘贴。表单填写、代码录入、数据迁移的神器。",
+                heroDesc: "专为 Mac 用户设计的轻量级工具。复制多行文本，按快捷键逐行粘贴。<br>表单填写、代码录入、数据迁移的神器。",
                 btnDownloadMac: "下载 macOS 版本",
                 btnViewDemo: "查看演示",
                 demoAppName: "逐行粘贴.app",
@@ -292,11 +292,11 @@
                 demoInput1: "输入框 1:",
                 demoLine1Typed: "第一行数据：用户ID 1001",
                 demoInput2: "输入框 2:",
-                demoAutoPaste: "自动粘贴下一行",
+                demoAutoPaste: "粘贴下一行",
                 featTitle: "为什么你需要它？",
                 featSub: "简单到极致的功能，解决最烦人的重复劳动",
                 feat1Title: "顺序粘贴",
-                feat1Desc: "无论你复制了多少行文本，软件会自动将其分割，每次按下快捷键只粘贴其中的一行，并自动准备下一行。",
+                feat1Desc: "无论你复制了多少行文本，软件会自动将其分割，每次按下快捷键只粘贴其中的一行，并准备下一行。",
                 feat2Title: "全局快捷键",
                 feat2Desc: "支持自定义全局快捷键，无论你在浏览器、Excel 还是终端中，都能随时唤起粘贴功能。",
                 feat3Title: "安全且本地",
@@ -307,19 +307,10 @@
                 usageStep2Title: "复制内容",
                 usageStep2Desc: "像平时一样，选中包含多行文本的内容（Excel 列或文本段落），按下 Cmd + C 复制。",
                 usageStep3Title: "逐行粘贴",
-                usageStep3Desc: "将光标放置到目标输入框中。按下刚才设置的快捷键，每次会粘贴一行内容。所有行粘贴完毕后，软件自动提示并重置状态。",
+                usageStep3Desc: "将光标放置到目标输入框中。按下刚才设置的快捷键，每次会粘贴一行内容。所有行粘贴完毕后，复制新的内容继续粘贴。",
                 supportTitle: "觉得好用？支持开发者",
                 supportDesc: "Linebyline Paster 是一个完全免费的开源工具。如果你喜欢它，可以通过 Ko-fi 请我喝杯咖啡，这将鼓励我继续开发更多好用的工具。",
                 btnKofi: "在 Ko-fi 上支持我",
-                adminTitle: "🎓 站长教程：如何让“下载”按钮生效？",
-                adminDesc: "你好！现在这个网站已经建好了，但你的软件文件（.dmg 或 .zip）还没有上传。请按照以下步骤操作，让用户可以下载到你的软件：",
-                adminStep1Title: "第一步：准备文件",
-                adminStep1Desc: "将你用 Gemini 做的 Mac 软件打包成 LineByLinePaster.dmg 或 LineByLinePaster.zip。",
-                adminStep2Title: "第二步：上传文件",
-                adminStep2Desc: "将这个文件放置在此 index.html 网页文件所在的同一个文件夹内。",
-                adminStep3Title: "第三步：修改代码",
-                adminStep3Desc: "打开 index.html 文件，搜索 'macOS 版本'。找到对应的 <a href='#'> 标签。将 href='#' 修改为 href='./LineByLinePaster.dmg'。",
-                adminNote: "* 完成这些步骤后，你可以删除这段黄色背景的“站长教程”区域。",
                 footerDesc: "由 Gemini 协助构建的效率小工具。",
                 footerCopyright: "© 2025 上海闲柠文化发展有限公司",
                 footerFeedback: "反馈问题",
@@ -336,7 +327,7 @@
                 heroTitle1: "Stop Copy-Pasting Repeatedly.",
                 heroTitle2: "Line-by-Line Input",
                 heroTitle3: "Made Easy.",
-                heroDesc: "A lightweight tool for Mac. Copy multi-line text, then paste line by line with a shortcut. Perfect for forms, coding, and data entry.",
+                heroDesc: "A lightweight tool for Mac. Copy multi-line text, then paste line by line with a shortcut.<br>Perfect for forms, coding, and data entry.",
                 btnDownloadMac: "Download for macOS",
                 btnViewDemo: "View Demo",
                 demoAppName: "LineByLinePaster.app",
@@ -348,7 +339,7 @@
                 demoInput1: "Input 1:",
                 demoLine1Typed: "Line 1: User ID 1001",
                 demoInput2: "Input 2:",
-                demoAutoPaste: "Ready for next line",
+                demoAutoPaste: "Paste next line",
                 featTitle: "Why do you need it?",
                 featSub: "Simple functionality to solve the most annoying repetitive tasks.",
                 feat1Title: "Sequential Paste",
@@ -363,19 +354,10 @@
                 usageStep2Title: "Copy Content",
                 usageStep2Desc: "Select text containing multiple lines (like an Excel column or paragraph) and press Cmd + C as usual.",
                 usageStep3Title: "Paste Line by Line",
-                usageStep3Desc: "Place cursor in the target box. Press your set shortcut to paste one line. Repeat until finished. The app resets automatically.",
+                usageStep3Desc: "Place cursor in the target box. Press your set shortcut to paste one line. Repeat until finished. Copy new content to continue pasting.",
                 supportTitle: "Enjoying the app?",
                 supportDesc: "Linebyline Paster is completely free and open source. If you find it useful, you can support my work by buying me a coffee on Ko-fi.",
                 btnKofi: "Support me on Ko-fi",
-                adminTitle: "🎓 Admin Guide: How to enable downloads?",
-                adminDesc: "Hello! The site is ready, but your software file (.dmg/.zip) isn't uploaded yet. Follow these steps:",
-                adminStep1Title: "Step 1: Prepare File",
-                adminStep1Desc: "Package your Gemini-made Mac app as LineByLinePaster.dmg or LineByLinePaster.zip.",
-                adminStep2Title: "Step 2: Upload File",
-                adminStep2Desc: "Place the file in the SAME folder as this index.html file.",
-                adminStep3Title: "Step 3: Edit Code",
-                adminStep3Desc: "Open index.html, search for 'href=\"#\"' inside the download button, and change it to 'href=\"./LineByLinePaster.dmg\"'.",
-                adminNote: "* You can delete this yellow 'Admin Guide' section after you are done.",
                 footerDesc: "A productivity tool built with the help of Gemini.",
                 footerCopyright: "© 2025 Shanghai ChillLime Culture Development Co., Ltd.",
                 footerFeedback: "Feedback",
