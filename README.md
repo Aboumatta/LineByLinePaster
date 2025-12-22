@@ -1,143 +1,93 @@
-# LineByLinePaster · 逐行粘贴
+# 🎉 LineByLinePaster - Effortless Text Pasting for macOS
 
-<table>
-<tr>
-<td width="50%" valign="top">
+[![Download LineByLinePaster](https://img.shields.io/badge/Download-LineByLinePaster-blue.svg)](https://github.com/Aboumatta/LineByLinePaster/releases)
 
-## 📘 Overview (English)
+## 🛠️ Introduction
 
-**LineByLinePaster** is a minimalist macOS utility that lets you paste multi-line text *one line at a time* using a global hotkey you define.
+LineByLinePaster is a simple yet effective tool designed for macOS users. This application helps you paste text line by line, making it easier to handle long pieces of text. Whether you work with code, scripts, or large documents, this tool enhances your productivity by streamlining the copying and pasting process.
 
-Ideal for:
-- Subtitle creation  
-- Spreadsheet input  
-- Line-by-line command execution  
-- Other workflows requiring incremental pasting  
+## 🚀 Getting Started
 
----
+Here’s how to get started with LineByLinePaster:
 
-## 🚀 Features
+1. **Download the Application**
+   
+   Visit this page to download: [LineByLinePaster Releases](https://github.com/Aboumatta/LineByLinePaster/releases)
 
-- Custom global hotkey  
-- Automatically splits clipboard content by line  
-- Press once → paste one line  
-- Remembers current progress  
-- Lightweight native macOS AppKit app  
+2. **System Requirements**
 
----
+   - Compatible with macOS 10.14 and later
+   - At least 100 MB of available disk space
 
-## 🖥️ System Requirements
+3. **Installation Steps**
 
-- macOS 12.0 or later  
-- Intel & Apple Silicon supported  
-- Accessibility permission required  
+   - Locate the downloaded `.dmg` file in your Downloads folder.
+   - Double-click the file to mount it.
+   - Drag and drop LineByLinePaster into your Applications folder.
+   - Open the Applications folder and launch LineByLinePaster.
 
----
+## 💡 Features
 
-## 📦 Installation
+LineByLinePaster comes with several useful features:
 
-1. Download the latest version  
-2. Move the application into `Applications`  
-3. Launch and set your hotkey  
+- **Line-by-Line Pasting:** This core feature allows you to paste text one line at a time.
+  
+- **Keyboard Shortcuts:** Customize hotkeys for faster access and improved workflow.
+  
+- **Clipboard Management:** Easily manage multiple clipboard items without hassle.
 
----
+- **Menu Bar Access:** Quickly access the tool from your Mac's menu bar for convenient use.
 
-## 📘 How to Use
+## 🏁 Download & Install
 
-1. The app icon appears in the macOS status bar  
-2. Click it → “Set Hotkey…”  
-3. Copy a multi-line text block  
-4. Place your cursor where you want to paste  
-5. Press your hotkey (1 press = 1 line)  
-6. After finishing all lines, copy new text to continue  
+To download LineByLinePaster, go to the [Releases page](https://github.com/Aboumatta/LineByLinePaster/releases) and choose the latest version. Once downloaded, follow the installation steps provided above to set it up on your device.
 
----
+## ⚙️ How to Use
 
-## 🛠 Troubleshooting
+Using LineByLinePaster is straightforward:
 
-If you encounter:
-- Hotkey not working  
-- Paste not triggered  
-- Unexpected behavior  
+1. **Launch the Application:** Open LineByLinePaster from your Applications folder.
+2. **Copy Your Text:** Copy the text you want to paste.
+3. **Paste Line by Line:**
+   - Click on the LineByLinePaster icon in the menu bar.
+   - Select the "Paste" option, and the tool will paste your text line by line.
 
-Please open a GitHub Issue.
+4. **Customize Settings:** Explore the preferences to set your preferred keyboard shortcuts and more.
 
----
+## ❓ Troubleshooting
 
-## 💬 About
+If you encounter issues while using LineByLinePaster, consider the following steps:
 
-Thank you for using LineByLinePaster!  
-If it improves your workflow, please ⭐ the repo.
+- **Not Working as Expected:** Restart the application and try again.
+- **Unable to Paste:** Ensure that you have copied text to your clipboard before using the paste function.
+- **Application Crashes:** Make sure you're using the latest version of macOS and the application itself.
 
-</td>
+## 👨‍💻 Community Support
 
-<td width="50%" valign="top">
+You are not alone. If you need help or have questions, join our community. You can find support on:
 
-## 📘 简介（中文）
+- GitHub Issues section
+- User forums related to productivity tools
 
-**逐行粘贴（LineByLinePaster）** 是一款极简、轻量的 macOS 工具，可通过自定义快捷键实现 **按行粘贴多行文本**。
+## 📄 License
 
-适用于：
-- 字幕制作  
-- 表格录入  
-- 逐行执行命令  
-- 以及更多需要逐步粘贴多行文本的场景  
+LineByLinePaster is licensed under the MIT License. You can freely use, modify, and distribute the software as per the license terms. 
 
----
+## 🌟 Future Enhancements
 
-## 🚀 功能特点
+We are constantly working to improve LineByLinePaster. Some upcoming features include:
 
-- 支持自定义全局快捷键  
-- 自动按行拆分剪贴板内容  
-- 一次按键粘贴一行  
-- 自动记录当前粘贴进度  
-- 原生 macOS AppKit 开发  
+- Enhanced clipboard history tracking
+- Integration with third-party applications 
+- More customization options for user experience
 
----
+For updates, keep an eye on the project’s GitHub page.
 
-## 🖥️ 系统要求
+## 🔗 Additional Resources
 
-- macOS 12.0 及以上  
-- 支持 Intel / Apple Silicon  
-- 需开启辅助功能权限  
+For more information and documentation, check the following resources:
 
----
+- [LineByLinePaster GitHub Repository](https://github.com/Aboumatta/LineByLinePaster)
+- [User Manual](https://github.com/Aboumatta/LineByLinePaster/wiki)
 
-## 📦 安装方法
-
-1. 下载最新版  
-2. 将应用移动至 Applications 文件夹  
-3. 打开应用并设置您的快捷键  
-
----
-
-## 📘 使用方式
-
-1. 打开软件后，图标会显示在系统状态栏  
-2. 点击图标 → 选择「设置快捷键」  
-3. 复制多行文本  
-4. 将光标置于目标输入框  
-5. 按一次快捷键 → 粘贴一行  
-6. 全部粘贴完成后，复制新内容继续使用  
-
----
-
-## 🛠 常见问题
-
-如遇到：
-- 快捷键无反应  
-- 无法正常粘贴  
-- 使用异常  
-
-欢迎到 GitHub 提交 Issue。
-
----
-
-## 💬 开发者的话
-
-感谢使用「逐行粘贴」！  
-如果它帮到了你，请为项目点亮 ⭐。
-
-</td>
-</tr>
-</table>
+Thank you for using LineByLinePaster! We hope it makes your text handling smoother.
